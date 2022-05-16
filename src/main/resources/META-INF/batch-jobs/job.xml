@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="simplejob" xmlns="https://jakarta.ee/xml/ns/jakartaee"
+                    version="2.0">
+    
+  <step id="step-1" next="step-2">
+    <chunk>
+      <reader ref="myReader"></reader>
+      <processor ref="myProcessor"></processor>
+      <writer ref="myWriter"></writer>
+    </chunk>
+  </step>
+  
+  
+  <step id="step-2">
+    <batchlet ref="MyBatchlet"></batchlet>
+    <end on="COMPLETED"/>
+  </step>
+  
+  <decision>
+      <!-- ... -->
+  </decision>
+  
+  <flow>
+      <!-- ... -->
+  </flow>
+  
+  <split>
+      <!-- ... -->
+  </split>
+</job>
