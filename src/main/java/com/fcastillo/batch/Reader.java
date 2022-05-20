@@ -5,9 +5,11 @@
  */
 package com.fcastillo.batch;
 
-import jakarta.batch.api.chunk.ItemReader;
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Named;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import javax.batch.api.chunk.ItemReader;
+import javax.enterprise.context.Dependent;
+import javax.inject.Named;
 import java.io.Serializable;
 
 /**
@@ -16,26 +18,36 @@ import java.io.Serializable;
  */
 @Dependent
 @Named("myReader")
-public class Reader implements ItemReader{
+public class Reader implements ItemReader {
+
+  private BufferedReader bufferReader;
 
   @Override
   public void open(Serializable srlzbl) throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    bufferReader = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/user.txt")));
   }
 
   @Override
   public void close() throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    bufferReader.close();
   }
 
   @Override
   public Object readItem() throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    String line = null;
+    try {
+      line = bufferReader.readLine();
+    } catch (Exception e) {
+      System.out.println("" + e);
+    }
+
+    return line;
   }
 
   @Override
   public Serializable checkpointInfo() throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    // TODO: Se debe implementar una clase para el control
+    return null;
   }
-  
+
 }

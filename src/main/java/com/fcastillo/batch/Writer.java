@@ -5,11 +5,10 @@
  */
 package com.fcastillo.batch;
 
-import jakarta.batch.api.chunk.ItemWriter;
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Named;
-import java.io.Serializable;
+import javax.enterprise.context.Dependent;
+import javax.inject.Named;
 import java.util.List;
+import javax.batch.api.chunk.AbstractItemWriter;
 
 /**
  *
@@ -17,26 +16,11 @@ import java.util.List;
  */
 @Dependent
 @Named("myWriter")
-public class Writer implements ItemWriter{
-
-  @Override
-  public void open(Serializable srlzbl) throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
-
-  @Override
-  public void close() throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
+public class Writer extends AbstractItemWriter {
 
   @Override
   public void writeItems(List<Object> list) throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    System.out.println("Writing items: " + list.toString());
   }
 
-  @Override
-  public Serializable checkpointInfo() throws Exception {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
-  
 }
